@@ -15,3 +15,4 @@ This is my repo for **STATS 220**.
   3. Understand how to work with **Github**.
 
 A meme that captures how I currently feel about my university studies is![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+Find more memes at:- https://giphy.com 
