@@ -10,7 +10,7 @@ This is my repo for **STATS 220**.
 - I am interested in learning about **Data Science**.
 
   #### My learning goals
-  1. Improve my skills in **data visualisation**.
+  1. Improve my skills in **Data Visualisation**.
   2. Learn how to use **RStudio** effectively.
   3. Understand how to work with **GitHub**.
 
