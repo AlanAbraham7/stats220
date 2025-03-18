@@ -11,8 +11,8 @@ This is my repo for **STATS 220**.
 
   #### My learning goals
   1. Improve my skills in **data visualisation**.
-  2. Learn how to use **Rstudio** effectively.
-  3. Understand how to work with **Github**.
+  2. Learn how to use **RStudio** effectively.
+  3. Understand how to work with **GitHub**.
 
 A meme that captures how I currently feel about my university studies is![](https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif)
 
