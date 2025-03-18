@@ -14,5 +14,6 @@ This is my repo for **STATS 220**.
   2. Learn how to use **Rstudio** effectively.
   3. Understand how to work with **Github**.
 
-A meme that captures how I currently feel about my university studies is![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+A meme that captures how I currently feel about my university studies is![](https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif)
+
 Find more memes at:- https://giphy.com 
