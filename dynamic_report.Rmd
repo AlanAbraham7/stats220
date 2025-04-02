@@ -1,0 +1,102 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+
+```{css, echo=FALSE}
+body {
+  background-color: lightyellow;
+}
+
+```
+
+## Coffee Consumption Analysis Report
+
+This report analyzes data collected from observations of coffee consumption in a cafe over a period of time. The data includes the time of day, the type of coffee ordered, the time spent at the cafe, and the perceived busyness level. The purpose of this analysis is to explore trends in coffee consumption and customer behavior in relation to the cafe's environment.
+
+```{r load_data, include=FALSE}
+library(tidyverse)
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRfSHxgXfIoeaDBdJqC69hAT0xbqUek8_c_s05Xx1EVzJ4C_D15jBhMLquGf8FsgVSnokm55XMcBALa/pub?output=csv") 
+
+latest_data <- logged_data %>%
+  rename(
+    timestamp = Timestamp,
+    time_of_day = `What time of day are you making this observation?`,
+    coffee_type = `Type of Coffee Ordered`,
+    time_spent = `How many minutes did the person spend at the cafe?`,
+    busyness = `How busy is the cafe?` 
+  )
+```
+
+```{r Most common coffee type, echo=FALSE}
+# Summary Value 1: Most common coffee type
+most_common_coffee <- latest_data %>%
+  group_by(coffee_type) %>%
+  summarize(count = n()) %>%
+  slice_max(count, n = 1) %>%
+  pull(coffee_type)
+
+# Dynamic comment: Display the most common coffee
+paste("The most common coffee ordered was:", most_common_coffee)
+
+```
+
+The most common coffee ordered is `r most_common_coffee`. This suggests that the majority of customers prefer this type of coffee.
+
+```{r, echo=FALSE}
+# Summary Value 2: Range of time spent
+time_spent_range <- latest_data %>%
+  summarize(min_time = min(time_spent, na.rm = TRUE),
+            max_time = max(time_spent, na.rm = TRUE))
+
+print(paste("Time spent range:", time_spent_range$min_time, "to", time_spent_range$max_time, "minutes"))
+
+```
+
+The time spent at the cafe ranged from `r time_spent_range$min_time` to `r time_spent_range$max_time` minutes. This wide range indicates a variety of customer behaviors, with some staying briefly and others for longer periods.
+
+```{r, echo=FALSE}
+# Bar Chart 1: Average time spent by time of day (custom colors)
+average_time_by_day_plot <- latest_data %>%
+  group_by(time_of_day) %>%
+  summarise(mean_time = mean(time_spent, na.rm = TRUE)) %>% 
+  ggplot(aes(x = time_of_day, y = mean_time, fill = time_of_day)) +
+  geom_col() +
+  labs(title = "Average Time Spent by Time of Day",
+       x = "Time of Day",
+       y = "Average Time Spent (minutes)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("blue", "darkorange", "lightblue"))
+
+# Display the plot
+average_time_by_day_plot
+
+```
+
+The following plot shows the average time spent at the cafe for each time of day. The times of day with the longest and shortest average time spent can be seen in the plot.
+
+```{r, echo=FALSE}
+avg_time_by_busyness_plot <- latest_data %>%
+  group_by(busyness) %>%
+  summarise(mean_time = mean(time_spent,)) %>%
+  ggplot(aes(x = busyness, y = mean_time, fill = busyness)) +
+  geom_col() +
+  labs(title = "Average Time Spent in Café by Busyness Level",
+       x = "Busyness Level",
+       y = "Average Time Spent (minutes)") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set1")
+
+print(avg_time_by_busyness_plot) 
+
+
+```
+
+
+This plot shows the average time spent at the cafe for each busyness level. The busyness level with the longest average time spent can be seen in the plot.
